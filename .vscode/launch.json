@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "command": "./gradlew :androidApp:installDebug",
+            "name": "Android: Install and Run (Debug)",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "./gradlew composeApp:run",
+            "name": "Desktop: Run [requires kmp.android.only=false]",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "./gradlew :composeApp:compileIosMainKotlinMetadata",
+            "name": "iOS: Compile Metadata [requires kmp.android.only=false]",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "./gradlew help \"-Pkmp.android.only=true\"",
+            "name": "Android: Sync/Refresh Project",
+            "request": "launch",
+            "type": "node-terminal"
+        }
+    ]
+}
