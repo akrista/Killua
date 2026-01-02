@@ -12,70 +12,31 @@ kotlin {
     androidLibrary {
         namespace = "com.notakrista.killua.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
-        }
+        compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21) }
     }
-    
+
     if (!isAndroidOnly) {
         iosArm64()
         iosSimulatorArm64()
 
         jvm()
 
-        js {
-            browser()
-        }
+        js { browser() }
 
-        @OptIn(ExperimentalWasmDsl::class)
-        wasmJs {
-            browser()
-        }
+        @OptIn(ExperimentalWasmDsl::class) wasmJs { browser() }
     }
-    
+
     sourceSets {
-        commonMain.dependencies {
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-        androidUnitTest {
-            dependencies {
-                implementation(libs.kotlin.test)
-            }
-        }
+        commonMain.dependencies {}
+        commonTest.dependencies { implementation(libs.kotlin.test) }
+        androidUnitTest { dependencies { implementation(libs.kotlin.test) } }
         if (!isAndroidOnly) {
-            jvmTest {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            jsTest {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            wasmJsTest {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            iosX64Test {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            iosArm64Test {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            iosSimulatorArm64Test {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
+            jvmTest { dependencies { implementation(libs.kotlin.test) } }
+            jsTest { dependencies { implementation(libs.kotlin.test) } }
+            wasmJsTest { dependencies { implementation(libs.kotlin.test) } }
+            iosX64Test { dependencies { implementation(libs.kotlin.test) } }
+            iosArm64Test { dependencies { implementation(libs.kotlin.test) } }
+            iosSimulatorArm64Test { dependencies { implementation(libs.kotlin.test) } }
         }
     }
 }
-
