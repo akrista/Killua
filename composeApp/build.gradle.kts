@@ -16,16 +16,11 @@ kotlin {
     androidLibrary {
         namespace = "com.notakrista.killua.compose"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
-        }
+        compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21) }
     }
-    
+
     if (!isAndroidOnly) {
-        listOf(
-            iosArm64(),
-            iosSimulatorArm64()
-        ).forEach { iosTarget ->
+        listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
             iosTarget.binaries.framework {
                 baseName = "ComposeApp"
                 isStatic = true
@@ -45,7 +40,7 @@ kotlin {
             binaries.executable()
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
@@ -62,56 +57,24 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-        androidUnitTest {
-            dependencies {
-                implementation(libs.kotlin.test)
-            }
-        }
+        commonTest.dependencies { implementation(libs.kotlin.test) }
+        androidUnitTest { dependencies { implementation(libs.kotlin.test) } }
         if (!isAndroidOnly) {
             jvmMain.dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutinesSwing)
             }
-            jvmTest {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            jsTest {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            wasmJsTest {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            iosX64Test {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            iosArm64Test {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
-            iosSimulatorArm64Test {
-                dependencies {
-                    implementation(libs.kotlin.test)
-                }
-            }
+            jvmTest { dependencies { implementation(libs.kotlin.test) } }
+            jsTest { dependencies { implementation(libs.kotlin.test) } }
+            wasmJsTest { dependencies { implementation(libs.kotlin.test) } }
+            iosX64Test { dependencies { implementation(libs.kotlin.test) } }
+            iosArm64Test { dependencies { implementation(libs.kotlin.test) } }
+            iosSimulatorArm64Test { dependencies { implementation(libs.kotlin.test) } }
         }
     }
 }
 
-
 // dependencies block removed for composeApp as library or moved to sourceSets
-
 
 compose.desktop {
     application {

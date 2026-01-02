@@ -5,8 +5,6 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
-// remove the kotlin { } block as it is now a standard android module
-
 android {
     namespace = "com.notakrista.killua"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -18,16 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
+    packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
+    buildTypes { getByName("release") { isMinifyEnabled = false } }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
@@ -37,5 +27,11 @@ android {
 dependencies {
     implementation(projects.composeApp)
     implementation(libs.androidx.activity.compose)
-    debugImplementation(compose.uiTooling)
+    
+    val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
+    implementation(composeBom)
+    debugImplementation(composeBom)
+    
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview")
 }
